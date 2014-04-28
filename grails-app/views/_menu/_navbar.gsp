@@ -23,7 +23,9 @@
 		</ul>
 
     	<ul class="nav navbar-nav navbar-right">
+                        <sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_USER">
  			<g:render template="/_menu/search"/> 
+                        </sec:ifAnyGranted>
                         <sec:ifAllGranted roles="ROLE_ADMIN">
 			<g:render template="/_menu/admin"/>														
 			</sec:ifAllGranted>

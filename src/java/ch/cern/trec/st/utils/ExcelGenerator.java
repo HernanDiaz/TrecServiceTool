@@ -11,6 +11,7 @@ package ch.cern.trec.st.utils;
  */
 import java.io.OutputStream;
 import org.apache.poi.hssf.usermodel.*;
+import org.apache.poi.hssf.util.CellReference;
 
 /**
  *
@@ -23,18 +24,24 @@ public class ExcelGenerator {
 
     public void  generateExcel(int codeRepetitions, int numCodes, String fixPart, String varPart, String[] cNames, String[] cContents, OutputStream out) throws Exception {
         
+        String sname = "Codes sheet";
+        String cname = "TableToPrint";
         HSSFWorkbook workbook = new HSSFWorkbook();
-        HSSFSheet sheet = workbook.createSheet("Codes sheet");
-
+        HSSFSheet sheet = workbook.createSheet(sname);
+        //CellRangeAddress
+        String lastCell = "";
         int rownum = 0;
         if (cNames.length > 0) {
-            short cellnum = 0;
+            int cellnum = 0;
             HSSFRow row = sheet.createRow(rownum++);
+            
             for (String header : cNames) {
-                HSSFCell cell = row.createCell(cellnum++);
+                HSSFCell cell = row.createCell(cellnum++,HSSFCell.CELL_TYPE_STRING);
+                
                 HSSFRichTextString text = new HSSFRichTextString(header);
                 cell.setCellValue(text);
-
+                lastCell = CellReference.convertNumToColString(cell.getColumnIndex())+(cell.getRowIndex()+1);
+               
             }
         }
 
@@ -43,26 +50,35 @@ public class ExcelGenerator {
         String lastVarCode = "";
 
         while (rownum - 1 < numCodes * codeRepetitions) {
-            short cellnum = 0;
+            int cellnum = 0;
             HSSFRow row = sheet.createRow(rownum++);
             
             if (varPart!= null){
-                HSSFCell cell = row.createCell(cellnum++);
+                HSSFCell cell = row.createCell(cellnum++,HSSFCell.CELL_TYPE_STRING);
                 if (numCodeRepetitions == 0){
                     lastVarCode = getNextCode();
                 }
                 numCodeRepetitions = (numCodeRepetitions+1)%codeRepetitions;
                 HSSFRichTextString text = new HSSFRichTextString(fixPart+lastVarCode);
                 cell.setCellValue(text);
+                lastCell = CellReference.convertNumToColString(cell.getColumnIndex())+(cell.getRowIndex()+1);
             }
 
             for (String header : cContents) {
-                HSSFCell cell = row.createCell(cellnum++);
+                HSSFCell cell = row.createCell(cellnum++, HSSFCell.CELL_TYPE_STRING);
                 HSSFRichTextString text = new HSSFRichTextString(header);
                 cell.setCellValue(text);
-
+                lastCell = CellReference.convertNumToColString(cell.getColumnIndex())+(cell.getRowIndex()+1);
             }
         }
+        
+        
+        HSSFName namedCells = workbook.createName();
+        namedCells.setNameName(cname);
+        namedCells.setSheetIndex(0);
+        String reference = "'"+sname+"'!A1:"+lastCell; // area reference
+        //System.out.println("Referencia:"+reference);
+        namedCells.setRefersToFormula(reference);
         
         workbook.write(out);
     }

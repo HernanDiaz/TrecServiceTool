@@ -9,7 +9,7 @@ import grails.transaction.Transactional
  * A controller class handles incoming web requests and performs actions such as redirects, rendering views and so on.
  */
 @Transactional(readOnly = true)
-//@Secured (["ROLE_USER", "ROLE_ADMIN"])
+@Secured (["ROLE_ADMIN"])
 class UserRoleController {
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 

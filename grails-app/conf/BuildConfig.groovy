@@ -55,9 +55,9 @@ grails.project.dependency.resolution = {
         //runtime ':jquery:1.8.3'
         //compile ':lesscss-resources:1.3.0.3'
         
-        compile group: 'org.apache.poi', name: 'poi', version: '3.1-FINAL' 
-        build group: 'org.apache.poi', name: 'poi', version: '3.1-FINAL' 
-        runtime group: 'org.apache.poi', name: 'poi', version: '3.1-FINAL' 
+        compile group: 'org.apache.poi', name: 'poi', version: '3.10-FINAL' 
+        build group: 'org.apache.poi', name: 'poi', version: '3.10-FINAL' 
+        runtime group: 'org.apache.poi', name: 'poi', version: '3.10-FINAL' 
         runtime group: 'org.hsqldb', name: 'hsqldb', version: '2.3.1'
     }
 
