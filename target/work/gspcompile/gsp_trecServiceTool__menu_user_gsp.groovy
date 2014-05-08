@@ -17,23 +17,23 @@ printHtmlPart(1)
 invokeTag('message','g',9,['code':("security.signin.label")],-1)
 printHtmlPart(2)
 })
-invokeTag('ifNotLoggedIn','sec',20,[:],1)
+invokeTag('ifNotLoggedIn','sec',21,[:],1)
 printHtmlPart(3)
 createTagBody(1, {->
 printHtmlPart(4)
-invokeTag('loggedInUserInfo','sec',29,['field':("username")],-1)
+invokeTag('loggedInUserInfo','sec',30,['field':("username")],-1)
 printHtmlPart(5)
 expressionOut.print(createLink(controller: 'logout'))
 printHtmlPart(6)
-invokeTag('message','g',39,['code':("security.signoff.label")],-1)
+invokeTag('message','g',40,['code':("security.signoff.label")],-1)
 printHtmlPart(7)
 })
-invokeTag('ifLoggedIn','sec',40,[:],1)
+invokeTag('ifLoggedIn','sec',41,[:],1)
 printHtmlPart(8)
 createTagBody(1, {->
-invokeTag('message','g',44,['code':("default.user.unknown.label")],-1)
+invokeTag('message','g',45,['code':("default.user.unknown.label")],-1)
 })
-invokeTag('link','g',44,['controller':("user"),'action':("show")],1)
+invokeTag('link','g',45,['controller':("user"),'action':("show")],1)
 printHtmlPart(9)
 }
 public static final Map JSP_TAGS = new HashMap()
@@ -41,7 +41,7 @@ protected void init() {
 	this.jspTags = JSP_TAGS
 }
 public static final String CONTENT_TYPE = 'text/html;charset=UTF-8'
-public static final long LAST_MODIFIED = 1398695182000L
+public static final long LAST_MODIFIED = 1399466217851L
 public static final String EXPRESSION_CODEC = 'html'
 public static final String STATIC_CODEC = 'none'
 public static final String OUT_CODEC = 'html'

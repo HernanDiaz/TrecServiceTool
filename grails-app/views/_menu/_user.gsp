@@ -11,7 +11,8 @@
 
 		<ul class="dropdown-menu" role="menu">
 			<li class="form-container">
-				<form action="/TrecServiceTool/j_spring_security_check" method="post" autocomplete='off'>
+                                
+				<form action="j_spring_security_check" method="post" autocomplete='off'>
 <%--				<form action="login" method="post" accept-charset="UTF-8">--%>
 					<input class="form-control" style="margin-bottom: 15px;" type="text"		placeholder="Username" id="username" name="j_username">
 					<input class="form-control" style="margin-bottom: 15px;" type="password"	placeholder="Password" id="password" name="j_password">

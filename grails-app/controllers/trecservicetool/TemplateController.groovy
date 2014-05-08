@@ -138,7 +138,7 @@ class TemplateController {
         ExcelGenerator e = new ExcelGenerator()
         String[] cnames = [templateInstance.header1,templateInstance.header2,templateInstance.header3,templateInstance.header4,templateInstance.header5,templateInstance.header6]
         String[] ccontent = [templateInstance.content2,templateInstance.content3,templateInstance.content4,templateInstance.content5,templateInstance.content6]
-        e.generateExcel(templateInstance.numberOfCodes as int,templateInstance.codeRepetitions as int,templateInstance.fixpart,templateInstance.varpart, cnames, ccontent, response.outputStream)
+        e.generateExcel(templateInstance.codeRepetitions as int,templateInstance.numberOfCodes as int,templateInstance.fixpart,templateInstance.varpart, cnames, ccontent, response.outputStream)
         response.outputStream.close()  
         response.outputStream.flush()
     }

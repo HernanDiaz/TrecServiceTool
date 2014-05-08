@@ -8,6 +8,8 @@ class UserRole implements Serializable {
 
 	User user
 	Role role
+        
+       
 
 	boolean equals(other) {
 		if (!(other instanceof UserRole)) {
@@ -59,7 +61,8 @@ class UserRole implements Serializable {
 	}
 
 	static mapping = {
-		id composite: ['role', 'user']
+                table "TST_USER_ROLE"
+        	id composite: ['role', 'user']
 		version false
 	}
 }

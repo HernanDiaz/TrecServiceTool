@@ -36,9 +36,9 @@ class Template {
     //	static	mappedBy	= []	// specifies which property should be used in a mapping 
 	
     static	mapping = {
+           table "TST_TEMPLATE" 
     }
-    
-   
+      
     
     static constraints = {
         fixpart(unique:true, nullable:false, blank:false)

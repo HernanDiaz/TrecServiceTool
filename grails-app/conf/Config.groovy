@@ -141,7 +141,8 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
         '/role/**':                       ['ROLE_ADMIN'],
         '/user/**':                       ['ROLE_ADMIN'],
         '/userRole/**':                   ['ROLE_ADMIN'],
-        '/**':                            ['IS_AUTHENTICATED_REMEMBERED']
+        '/**/plugins/**':                 ['permitAll'],
+        '/**':                            ['permitAll']
     
 ]
 

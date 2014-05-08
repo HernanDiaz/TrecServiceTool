@@ -1,69 +1,70 @@
 dataSource {
     pooled = true
-    jmxExport = true
-    driverClassName = "org.hsqldb.jdbcDriver"
-    username = "sa"
-    password = ""
+    //dbCreate = "none"
+    properties {
+        maxActive="20"
+        maxIdle="10"
+        minEvictableIdleTimeMillis=1800000
+        timeBetweenEvictionRunsMillis=1800000
+        numTestsPerEvictionRun=3
+        testOnBorrow=true
+        testWhileIdle=true
+        testOnReturn=false
+        validationQuery="SELECT 1"
+        jdbcInterceptors="ConnectionState"
+    }
 }
 hibernate {
     cache.use_second_level_cache = true
     cache.use_query_cache = false
-    cache.region.factory_class = 'net.sf.ehcache.hibernate.EhCacheRegionFactory' // Hibernate 3
-//    cache.region.factory_class = 'org.hibernate.cache.ehcache.EhCacheRegionFactory' // Hibernate 4
-    singleSession = true // configure OSIV singleSession mode
+    cache.region.factory_class = 'net.sf.ehcache.hibernate.EhCacheRegionFactory'
 }
 
-// environment specific settings
 environments {
-    development {
+     development {
+         
         dataSource {
-            dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
+            pooled = true
+            driverClassName = "org.hsqldb.jdbcDriver"
+            username = "sa"
+            password = ""
             url = "jdbc:hsqldb:file:devDb;shutdown=true"
+            dbCreate = "update" //create create-drop update
         }
     }
     test {
         dataSource {
+            driverClassName = "org.hsqldb.jdbcDriver"
             dbCreate = "update"
             url = "jdbc:hsqldb:file:testDb;shutdown=true"
+            username = "sa"
+            password = ""
         }
-    }
+   }
     production {
+        
         dataSource {
+            driverClassName = "oracle.jdbc.OracleDriver"
+            //driverClassName = "oracle.jdbc.driver.OracleDriver"
+            dialect = "org.hibernate.dialect.Oracle10gDialect"
+            //url = "jdbc:oracle:thin:@cerndb1"
+            url = "jdbc:oracle:thin:@dbsrvg3305.cern.ch:10121:DEVDB11"
+            username = "trecservicetool_admin"
+            password = "Tr3cs3rvic3t00l;"
             dbCreate = "update"
-            url = "jdbc:hsqldb:mem:prodDb;shutdown=true"
-                properties {
-                  maxActive="20"
-                  maxIdle="10"
-                  minEvictableIdleTimeMillis=1800000
-                  timeBetweenEvictionRunsMillis=1800000
-                  numTestsPerEvictionRun=3
-                  testOnBorrow=true
-                  testWhileIdle=true
-                  testOnReturn=false
-                  validationQuery="SELECT 1"
-                  jdbcInterceptors="ConnectionState"
-                }
-
-            //properties {
-               // See http://grails.org/doc/latest/guide/conf.html#dataSource for documentation
-              // jmxEnabled = true
-              // initialSize = 5
-              // maxActive = 50
-              // minIdle = 5
-              // maxIdle = 25
-              // maxWait = 10000
-              // maxAge = 10 * 60000
-              // timeBetweenEvictionRunsMillis = 5000
-              // minEvictableIdleTimeMillis = 60000
-              // validationQuery = "SELECT 1"
-              // validationQueryTimeout = 3
-              // validationInterval = 15000
-             //  testOnBorrow = true
-             //  testWhileIdle = true
-             //  testOnReturn = false
-             //  jdbcInterceptors = "ConnectionState"
-             //  defaultTransactionIsolation = java.sql.Connection.TRANSACTION_READ_COMMITTED
-            //}
-        }
+            properties {
+                validationQuery="SELECT 1 FROM DUAL"
+            }
+            }
+          /*  
+          dataSource {
+            driverClassName = "org.hsqldb.jdbcDriver"
+            dbCreate = "update"
+            url = "jdbc:hsqldb:file:testDb;shutdown=true"
+            username = "sa"
+            password = ""
+        } */
+        
     }
+   
 }
